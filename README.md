@@ -20,3 +20,4 @@ terraform.rc - файл terraform.rc
 new line for branch fix
 
 Change by PyCharm Git Window
+Commit by PyCharm 
