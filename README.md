@@ -18,3 +18,5 @@ override.tf.json - файл - override.tf.json
 .terraformrc - файл .terraformrc
 terraform.rc - файл terraform.rc
 new line for branch fix
+
+Change by PyCharm Git Window
