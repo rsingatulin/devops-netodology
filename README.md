@@ -17,3 +17,5 @@ override.tf.json - файл - override.tf.json
 
 .terraformrc - файл .terraformrc
 terraform.rc - файл terraform.rc
+
+![This is an image](https://github.com/rsingatulin/devops-netology/blob/main/merge.png)
