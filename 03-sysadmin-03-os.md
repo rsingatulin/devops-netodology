@@ -5,10 +5,9 @@
 
 Вам нужно найти тот единственный, который относится именно к cd. Обратите внимание, что strace выдаёт результат своей работы в поток stderr, а не в stdout.
 
-chdir("/tmp") 
+chdir("/tmp")
 
-2. Попробуйте использовать команду file на объекты разных типов в файловой системе. Например:
-
+2. Попробуйте использовать команду file на объекты разных типов в файловой системе. Например
 vagrant@netology1:~$ file /dev/tty
 /dev/tty: character special (5/0)
 vagrant@netology1:~$ file /dev/sda
@@ -72,6 +71,7 @@ o pipefail - the return value of a pipeline is the status of the last command to
 
 В моём случае бОльшая часть процессов в статусе S, Ss, Ss+, Sl - процессы, ожидающие завершения.
 Дополнительные характеристики уточняют состояние процессов:
+
 s    is a session leader
 l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
 +    is in the foreground process group
