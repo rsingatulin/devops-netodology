@@ -2,18 +2,24 @@
 
 1. Какой системный вызов делает команда cd?
 В прошлом ДЗ мы выяснили, что cd не является самостоятельной программой, это shell builtin, поэтому запустить strace непосредственно на cd не получится. Тем не менее, вы можете запустить strace на /bin/bash -c 'cd /tmp'. В этом случае вы увидите полный список системных вызовов, которые делает сам bash при старте.
-
 Вам нужно найти тот единственный, который относится именно к cd. Обратите внимание, что strace выдаёт результат своей работы в поток stderr, а не в stdout.
 
 chdir("/tmp")
 
 2. Попробуйте использовать команду file на объекты разных типов в файловой системе. Например
+
 vagrant@netology1:~$ file /dev/tty
+
 /dev/tty: character special (5/0)
+
 vagrant@netology1:~$ file /dev/sda
+
 /dev/sda: block special (8/0)
+
 vagrant@netology1:~$ file /bin/bash
+
 /bin/bash: ELF 64-bit LSB shared object, x86-64
+
 Используя strace выясните, где находится база данных file, на основании которой она делает свои догадки.
 
 /usr/share/misc/magic.mgc
@@ -48,12 +54,17 @@ Part of the utsname information is also accessible via /proc/sys/kernel/{ostype,
 7. Чем отличается последовательность команд через ; и через && в bash? 
 
 команда1 ; команда2 - команда2 выполняется независимо от результата выполнения команды1
+
 команда1 && команда2 - команда2 выполняется только при успешном выполнении команды1 (код завершения 0) 
 
 Например:
+
 root@netology1:~# test -d /tmp/some_dir; echo Hi  - echo сработает в любом случае
+
 Hi
+
 root@netology1:~# test -d /tmp/some_dir && echo Hi - echo сработает, если существует /tmp/some_dir
+
 root@netology1:~#
 
 Есть ли смысл использовать в bash &&, если применить set -e?
@@ -63,8 +74,11 @@ root@netology1:~#
 8. Из каких опций состоит режим bash set -euxo pipefail и почему его хорошо было бы использовать в сценариях?
 
 e - Exit immediately if a command exits with a non-zero status (остановка выполения, если команда завершается с ненулевым статусом)
+
 u - Treat unset variables as an error when substituting (рассматривать не заданные переменные как ошибку)
+
 x - Print commands and their arguments as they are executed (печатать соманды и аргументы по мере выполнения - трэйс)
+
 o pipefail - the return value of a pipeline is the status of the last command to exit with a non-zero status, or zero if no command exited with a non-zero status (возвращаемое значение конвейера — это статус последней команды для выхода с ненулевым статусом или ноль, если ни одна команда не вышла с ненулевым статусом)
 
 9. Используя -o stat для ps, определите, какой наиболее часто встречающийся статус у процессов в системе. В man ps ознакомьтесь (/PROCESS STATE CODES) что значат дополнительные к основной заглавной буквы статуса процессов. Его можно не учитывать при расчете (считать S, Ss или Ssl равнозначными).
@@ -73,5 +87,7 @@ o pipefail - the return value of a pipeline is the status of the last command to
 Дополнительные характеристики уточняют состояние процессов:
 
 s    is a session leader
+
 l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
+
 +    is in the foreground process group
